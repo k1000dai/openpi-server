@@ -10,6 +10,15 @@ It provides `WebsocketPolicyServer`, which:
 - returns the action response,
 - exposes a `/healthz` HTTP check endpoint.
 
+## Relationship with openpi-client
+
+`openpi-server` is designed to work with `openpi-client`.
+
+- Server-side policy interface: `openpi_client.base_policy.BasePolicy`
+- Wire format for messages: `openpi_client.msgpack_numpy`
+- Recommended client implementation:
+  `openpi_client.websocket_client_policy.WebsocketClientPolicy`
+
 ## Installation
 
 From PyPI:
@@ -52,6 +61,24 @@ server = WebsocketPolicyServer(
 )
 server.serve_forever()
 ```
+
+## Client Example (openpi-client)
+
+`openpi-client` includes a compatible WebSocket client policy:
+
+```python
+from openpi_client.websocket_client_policy import WebsocketClientPolicy
+
+client = WebsocketClientPolicy(host="127.0.0.1", port=8000)
+metadata = client.get_server_metadata()
+print(metadata)
+
+action = client.infer({"state": [0.0, 1.0, 2.0]})
+print(action)
+```
+
+`WebsocketClientPolicy` retries until the server is available, then receives
+server metadata as the first frame.
 
 ## Runtime Behavior
 
