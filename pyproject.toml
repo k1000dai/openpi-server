@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "openpi-server"
+version = "0.1.0"
+description = "WebSocket policy server for OpenPI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "openpi-client",
+    "websockets",
+]
+
+[tool.setuptools]
+packages = ["openpi_server"]
