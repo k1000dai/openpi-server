@@ -103,3 +103,9 @@ git push origin v0.1.0
 ## License
 
 Apache-2.0. See `LICENSE`.
+
+## Acknowledgements
+
+This package uses code from the
+[`Physical-Intelligence/openpi`](https://github.com/Physical-Intelligence/openpi)
+repository.
